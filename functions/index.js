@@ -1,16 +1,18 @@
 const functions = require('firebase-functions');
 const admin = require('firebase-admin');
+admin.initializeApp(functions.config().firebase);
 
-admin.initializeApp();
+exports.sendNotificationToTopic = functions.firestore.document('notification/{uid}').onWrite(async (event) => {
+    let title = event.after.get('title');
+    let content = event.after.get('body');
+    var message = {
+        notification: {
+            title: title,
+            body: content,
+        },
+        topic: event.after.get('to'),
+    };
 
-exports.myFunction = functions.firestore
-  .document('notification/{message}')
-  .onCreate((snapshot, context) => {
-    return admin.messaging().sendToTopic(snapshot.data().to, {
-      notification: {
-        title: snapshot.data().title,
-        body: snapshot.data().body,
-        clickAction: 'FLUTTER_NOTIFICATION_CLICK',
-      },
-    });
-  });
+    let response = await admin.messaging().send(message);
+    console.log(response);
+});

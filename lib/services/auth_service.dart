@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:math';
 
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:gms_user/models/ward.dart';
@@ -31,11 +32,14 @@ class AuthService {
       box.write("longitude", jsonResponse['longitude']);
       box.write("user_name", jsonResponse['user_name']);
       box.write("house_name", jsonResponse['house_name']);
+      final fbm = FirebaseMessaging();
+      fbm.requestNotificationPermissions();
+      fbm.subscribeToTopic('${box.read("ward_id")}');
       return true;
     }
   }
 
-  Future<bool> userRegister(String userName, String lat, String lon,
+  Future<String> userRegister(String userName, String lat, String lon,
       String houseName, String phone) async {
     String tempPhone = phone.substring(3);
 
@@ -52,7 +56,7 @@ class AuthService {
 
     if (result == "") {
       Get.rawSnackbar(message: "No ward found with these coordinates");
-      return false;
+      return "no ward";
     } else {
       wardId = result;
     }
@@ -68,12 +72,14 @@ class AuthService {
           "houseName": houseName,
         });
 
-    print(response.body);
-
     if (response.body == "yes") {
-      return await userSignIn(phone);
+      if (await userSignIn(phone)) {
+        return "yes";
+      } else {
+        return "no";
+      }
     } else {
-      return false;
+      return "no";
     }
   }
 

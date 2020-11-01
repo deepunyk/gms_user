@@ -43,7 +43,7 @@ class _LoginScreenState extends State<LoginScreen> {
             print("code send");
             isLoad = false;
             setState(() {});
-            //Get.to(OTPScreen(), arguments: [verId, phoneNumber]);
+            Get.to(OTPScreen(), arguments: [verId, phoneNumber]);
           },
           codeAutoRetrievalTimeout: (String verId) {
             isLoad = false;
@@ -59,15 +59,6 @@ class _LoginScreenState extends State<LoginScreen> {
       setState(() {});
       Get.rawSnackbar(message: "Invalid phone number");
     }
-  }
-
-  testLoginPhone() async {
-    String phone = "+91" + controller.text;
-    AuthService authService = AuthService();
-    final response = await authService.userSignIn(phone);
-    response
-        ? Get.offAll(HomeScreen())
-        : Get.offAll(RegisterScreen(), arguments: phone);
   }
 
   @override
@@ -119,7 +110,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         hintText: "Enter your phone number here",
                       ),
                       onSubmitted: (val) {
-                        testLoginPhone();
+                        loginPhone();
                       },
                     ),
                   ),
@@ -128,7 +119,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                   CustomAuthButton(
                     onTap: () {
-                      testLoginPhone();
+                      loginPhone();
                     },
                     title: "Login",
                   ),

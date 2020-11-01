@@ -2,6 +2,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:gms_user/screens/home_screen.dart';
+import 'package:gms_user/screens/register_screen.dart';
 import 'package:gms_user/services/auth_service.dart';
 import 'package:gms_user/widgets/custom_loading_button.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
@@ -15,7 +17,6 @@ class _OTPScreenState extends State<OTPScreen> {
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
   String verificationId = "";
   String phoneNumber = "";
-  GetStorage box = GetStorage();
   bool isLoad = false;
 
   Widget pincodeField(BuildContext context) {
@@ -49,15 +50,15 @@ class _OTPScreenState extends State<OTPScreen> {
         .signInWithCredential(_phoneAuthCredential)
         .then((user) async {
       AuthService authService = AuthService();
-      bool response = await authService.userSignIn(phoneNumber);
+      final response = await authService.userSignIn(phoneNumber);
       if (response) {
         isLoad = false;
         setState(() {});
-        //Get.offAll(HomeScreen());
+        Get.offAll(HomeScreen());
       } else {
         isLoad = false;
         setState(() {});
-        //Get.to(NameScreen(), arguments: phoneNumber);
+        Get.to(RegisterScreen(), arguments: phoneNumber);
       }
     }).catchError((error) {
       print("${error.hashCode}");

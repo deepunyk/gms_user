@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gms_user/screens/collection_screen.dart';
 import 'package:gms_user/screens/schedule_screen.dart';
+import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -9,7 +10,7 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   int curIndex = 0;
-  List<Widget> screens = [ScheduleScreen(), CollectionScreen()];
+  List<Widget> screens = [CollectionScreen(), ScheduleScreen()];
 
   @override
   Widget build(BuildContext context) {
@@ -25,12 +26,12 @@ class _HomeScreenState extends State<HomeScreen> {
         currentIndex: curIndex,
         items: [
           BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: 'Home',
+            icon: Icon(MdiIcons.truck),
+            label: 'Collection',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.list),
-            label: 'Collection',
+            icon: Icon(MdiIcons.table),
+            label: 'Schedule',
           ),
         ],
       ),

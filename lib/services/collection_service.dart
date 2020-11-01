@@ -8,14 +8,17 @@ class CollectionService {
   Future<List<Collection>> getCollections() async {
     List<Collection> collections = [];
 
-    GetStorage box = GetStorage();
-    print("${box.read("ward_id")}");
-    final response = await http.post(
-        "https://xtoinfinity.tech/GCUdupi/user/gms_php/getCollections.php",
-        body: {"ward_id": box.read('ward_id')});
-    final jsonResponse = json.decode(response.body);
-    final allData = jsonResponse['data'];
-    allData.map((e) => collections.add(Collection.fromJson(e))).toList();
+    try {
+      GetStorage box = GetStorage();
+      print("${box.read("ward_id")}");
+      final response = await http.post(
+          "https://xtoinfinity.tech/GCUdupi/user/gms_php/getCollections.php",
+          body: {"ward_id": box.read('ward_id')});
+      final jsonResponse = json.decode(response.body);
+      final allData = jsonResponse['data'];
+      allData.map((e) => collections.add(Collection.fromJson(e))).toList();
+    } catch (e) {}
+
     return collections.reversed.toList();
   }
 }

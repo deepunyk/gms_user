@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:http/http.dart' as http;
 
@@ -14,6 +15,11 @@ class ReportService {
 
     print(response.body);
     if (response.body == "yes") {
+      await FirebaseFirestore.instance.collection("notification").add({
+        "title": "${box.read('user_name')} has reported",
+        "body": "Click here to get more details",
+        "to": "admin"
+      });
       return true;
     } else {
       return false;
