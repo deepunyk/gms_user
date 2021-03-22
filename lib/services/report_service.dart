@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:gms_user/data/custom_constants.dart';
 import 'package:http/http.dart' as http;
 
 class ReportService {
@@ -7,7 +8,7 @@ class ReportService {
     GetStorage box = GetStorage();
 
     final response = await http.post(
-        "https://xtoinfinity.tech/GCUdupi/user/gms_php/addReport.php",
+        "${CustomConstants.url}gms_php/addReport.php",
         body: {
           "user_id": box.read('user_id').toString(),
           "complaint_date": DateTime.now().toString(),

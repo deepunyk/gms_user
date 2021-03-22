@@ -4,6 +4,7 @@ import 'dart:math';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:gms_user/data/custom_constants.dart';
 import 'package:gms_user/models/ward.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:google_maps_utils/google_maps_utils.dart';
@@ -13,7 +14,7 @@ class AuthService {
   Future<bool> userSignIn(String phoneNumber) async {
     phoneNumber = phoneNumber.substring(3);
     final response = await http.post(
-      "https://xtoinfinity.tech/GCUdupi/user/gms_php/signIn.php",
+      "${CustomConstants.url}gms_php/signIn.php",
       body: {
         "phone": phoneNumber,
       },
@@ -46,8 +47,8 @@ class AuthService {
     List<Ward> wards = [];
     String wardId = "";
 
-    final wardResponse = await http
-        .get("https://xtoinfinity.tech/GCUdupi/user/gms_php/getWards.php");
+    final wardResponse =
+        await http.get("${CustomConstants.url}gms_php/getWards.php");
     final jsonResponse = json.decode(wardResponse.body);
     final allData = jsonResponse['data'];
 
@@ -61,16 +62,15 @@ class AuthService {
       wardId = result;
     }
 
-    final response = await http.post(
-        "https://xtoinfinity.tech/GCUdupi/user/gms_php/signUp.php",
-        body: {
-          "phone": tempPhone,
-          "wardId": wardId,
-          "latitude": lat,
-          "longitude": lon,
-          "userName": userName,
-          "houseName": houseName,
-        });
+    final response =
+        await http.post("${CustomConstants.url}gms_php/signUp.php", body: {
+      "phone": tempPhone,
+      "wardId": wardId,
+      "latitude": lat,
+      "longitude": lon,
+      "userName": userName,
+      "houseName": houseName,
+    });
 
     if (response.body == "yes") {
       if (await userSignIn(phone)) {
