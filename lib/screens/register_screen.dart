@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:gms_core/services/auth_service.dart';
 import 'package:gms_user/screens/home_screen.dart';
 import 'package:gms_user/screens/location_picker_screen.dart';
-import 'package:gms_user/services/auth_service.dart';
 import 'package:gms_user/widgets/custom_auth_button.dart';
 import 'package:gms_user/widgets/custom_loading_button.dart';
 

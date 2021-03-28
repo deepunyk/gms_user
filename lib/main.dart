@@ -2,8 +2,6 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
-import 'package:gms_user/screens/login_screen.dart';
-import 'package:gms_user/screens/register_screen.dart';
 import 'package:gms_user/screens/splash_screen.dart';
 
 void main() async {

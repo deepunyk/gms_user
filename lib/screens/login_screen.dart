@@ -1,10 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:gms_user/screens/home_screen.dart';
 import 'package:gms_user/screens/otp_screen.dart';
-import 'package:gms_user/screens/register_screen.dart';
-import 'package:gms_user/services/auth_service.dart';
 import 'package:gms_user/widgets/custom_auth_button.dart';
 import 'package:gms_user/widgets/custom_loading_button.dart';
 

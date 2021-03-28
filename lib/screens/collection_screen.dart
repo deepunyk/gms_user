@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:gms_user/models/collection.dart';
-import 'package:gms_user/services/collection_service.dart';
-import 'package:gms_user/services/report_service.dart';
+import 'package:gms_core/models/collection.dart';
+import 'package:gms_core/services/collection_service.dart';
+import 'package:gms_core/services/report_service.dart';
 import 'package:gms_user/widgets/custom_error_widget.dart';
 import 'package:gms_user/widgets/custom_loading_button.dart';
 import 'package:intl/intl.dart';

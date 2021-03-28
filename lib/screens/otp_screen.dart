@@ -1,10 +1,9 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get_storage/get_storage.dart';
+import 'package:gms_core/services/auth_service.dart';
 import 'package:gms_user/screens/home_screen.dart';
 import 'package:gms_user/screens/register_screen.dart';
-import 'package:gms_user/services/auth_service.dart';
 import 'package:gms_user/widgets/custom_loading_button.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 
@@ -61,7 +60,7 @@ class _OTPScreenState extends State<OTPScreen> {
         Get.to(RegisterScreen(), arguments: phoneNumber);
       }
     }).catchError((error) {
-      print("${error.hashCode}");
+      print("$error");
       _scaffoldKey.currentState.showSnackBar(
           new SnackBar(content: new Text("Incorrect OTP, please try again")));
       isLoad = false;

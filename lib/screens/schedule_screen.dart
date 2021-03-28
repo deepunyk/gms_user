@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:gms_user/models/schedule.dart';
-import 'package:gms_user/services/schedule_service.dart';
+import 'package:gms_core/models/schedule.dart';
+import 'package:gms_core/services/schedule_service.dart';
 import 'package:gms_user/widgets/custom_loading_button.dart';
 
 class ScheduleScreen extends StatefulWidget {
